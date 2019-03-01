@@ -7,8 +7,8 @@
                 <span>{{ quotes.length }} / 10</span>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 col-lg-offset-2">
+        <div class="row"> <!-- User input -->
+            <div class="col-md-8 offset-md-2">
                 <div class="row">
                     <div class="col">
                         <h4>Quote</h4>
@@ -22,9 +22,14 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div v-for="q in quotes" class="col-6 col-md-2 col-xl-1 quote">
-                <p class="text-center">{{ q }}</p>
+        <div class="row mt-4"> <!-- Quote listing -->
+            <div
+                    v-for="(q, i) in quotes"
+                    class="col-6 col-md-2 quote">
+                <p
+                        @click="removeQuote"
+                        :qid="i"
+                        class="text-center">{{ q }}</p>
             </div>
         </div>
     </div>
@@ -41,6 +46,11 @@
                 ]
             }
         },
+        methods: {
+            removeQuote: function(event) {
+                console.log(event.target.$attrs('qid'));
+            }
+        }
     }
 </script>
 
@@ -54,6 +64,7 @@
         content:'fdsa'
     }
     div.quote > p {
+        cursor: pointer;
         font-family: 'Comic Sans MS';
         border: thin solid lightgray;
         border-radius: 0.5rem;
